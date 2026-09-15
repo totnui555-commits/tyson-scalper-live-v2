@@ -1,0 +1,79 @@
+symbol: XAUUSD
+mode: paper
+allow_live_trading: false
+require_live_arm_file: true
+kill_switch_file: KILL_SWITCH
+live_arm_file: LIVE_ARMED
+
+account:
+  allowed_logins: []
+  allowed_servers: []
+  require_trade_allowed: true
+
+strategy:
+  bias_timeframe: M15
+  execution_timeframe: M5
+  score_threshold: 5
+  swing_lookback: 25
+  liquidity_lookback: 20
+  fvg_lookback: 12
+  atr_period: 14
+  rsi_period: 14
+  displacement_atr_mult: 0.85
+  sl_atr_buffer: 0.25
+  rr: 4.0
+
+filters:
+  session_timezone: UTC
+  session_windows:
+    - ["06:00", "11:00"]
+    - ["12:00", "17:30"]
+  max_spread_price: 0.50
+  max_spread_atr_ratio: 0.25
+  min_sl_distance_price: 2.50
+  max_spread_to_sl_ratio: 0.20
+  min_atr_price: 0.50
+  max_entry_drift_price: 0.50
+  max_send_drift_price: 0.25
+  max_tick_age_seconds: 5
+  cooldown_minutes: 5
+  news_filter:
+    enabled: true
+    provider: manual_csv
+    csv_path: news_blackout.csv
+    minutes_before: 20
+    minutes_after: 20
+    fail_closed_if_unavailable: true
+
+risk:
+  risk_day_timezone: Asia/Bangkok
+  risk_per_trade_pct: 0.25
+  daily_loss_limit_pct: 1.25
+  max_consecutive_losses: 3
+  max_open_positions: 1
+  max_trades_per_day: 8
+  max_margin_usage_pct_of_free_margin: 25
+  max_risk_overrun_pct: 2.0
+  breakeven_trigger_r: 0.80
+  breakeven_buffer_price: 0.15
+  trailing_stop_enabled: true
+  trail_start_r: 1.20
+  trail_distance_r: 0.75
+
+execution:
+  max_slippage_price: 0.50
+  deviation_points: 50
+  magic: 560002
+  comment: TysonGoldScalperV2
+  prefer_filling_modes: [FOK, IOC, RETURN]
+  stop_level_extra_points: 10
+  reject_if_min_volume_exceeds_risk: true
+  order_check_required: true
+
+state:
+  sqlite_path: scalper_state.db
+
+backtest:
+  spread_price: 0.35
+  slippage_price: 0.05
+  max_hold_bars: 30

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+scalper_state.sqlite3
+LIVE_ARMED
+KILL_SWITCH
+config.yaml
+*.db
+*.sqlite
